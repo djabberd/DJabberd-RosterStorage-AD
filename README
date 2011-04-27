@@ -1,0 +1,59 @@
+DJabberd-RosterStorage-AD
+======================================
+
+DJabberd-RosterStorage-AD - auto population of roster with contacts extracted
+from Active Directory.
+
+Example:
+
+<Plugin DJabberd::RosterStorage::AD>
+    
+    # Define directory server connection, base and filter
+    # (You can define several directory servers)
+
+    LdapServer      DOM1  dc1.example.com dc2.example.com
+    LdapUser        DOM1  example\djabberd-domain-user
+    LdapPassword    DOM1  supersecretpassword
+    LdapBase        DOM1  "OU=users,DC=example,DC=com"
+    LdapFilter      DOM1  (&(objectClass=user)(primaryGroupID=513))
+
+    LdapServer      DOM2  dc1.branch1.example.com dc2.branch1.example.com
+    LdapUser        DOM2  branch1\djabberd-domain-user
+    LdapPassword    DOM2  anothersecretpassword
+    LdapBase        DOM2  "OU=users,DC=branch1,DC=example,DC=com"
+    LdapFilter      DOM2  (&(objectClass=user)(primaryGroupID=513))
+
+    # Define roster's groups based on a windows groups
+    RosterGroup     "Sales"  DOM1    Domain-Group-Sales
+    RosterGroup     "IT"     DOM1    Domain-Group-IT
+    RosterGroup     "Branch" DOM2    Domain-Group-Branch1
+
+    Database        /var/lib/djabberd/roster.sqlite
+</Plugin>
+
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+    Djabberd >= 0.84
+    Djabberd-Roster-SQLite >= 1
+    Net::LDAP 
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2009,2011 by Vladimir Lettiev
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.12.3 or,
+at your option, any later version of Perl 5 you may have available.
+
+

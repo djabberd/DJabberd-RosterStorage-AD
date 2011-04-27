@@ -1,0 +1,6 @@
+Revision history for Perl extension DJabberd::RosterStorage::AD.
+
+0.01  Wed Apr 27 15:05:30 2011
+	- original version; created by h2xs 1.23 with options
+		-AX -b 5.8.9 -n DJabberd::RosterStorage::AD -v 0.01
+
